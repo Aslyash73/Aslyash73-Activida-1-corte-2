@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ACTIVIDAD 1</title>
+    <script type="text/javascript" src="JS actividad 1.js"></script>
+</head>
+
+<body>
+
+    <div style="background-color:rgb(131, 202, 226);color:rgb(7, 6, 6);padding:30px;">
+        <h2 style="text-align:center">
+            <b><nav>👩</b> Numeros Primos👩</nav></h2>
+    <h3>
+        
+        <input id="fixed" checked="checked" name="range" type="radio" value="first">
+        "Hallar los primeros"
+        <br>
+        <input id="firstEnd" type="text" value="100">
+        "números primos"
+        <p></p>
+        <p>
+            <input id="userRange" name="range" type="radio" value="primeRange">
+            "Números primos desde:"
+            <br>
+            <input id="userStart" type="text" value="1">
+            "hasta"
+            <br>
+            <input id="userEnd" type="text" value="100">
+            <br>
+            <textarea id="output" style="margin: 0px; width: 634px; height: 156px;" name="output"></textarea>
+            <br>
+            <input style="margin:0px auto; display:block;" type="button" value="Generar Números Primos" id="generatePrimes" name="button">
+             <br>
+             <input style="margin:0px auto; display:block;" type="button" value="Gráfico para imprimir" id="printChart" name="button">
+             <br>
+             <input style="margin:0px auto; display:block;" type="button" value="Limpiar" id="reset" name="button">
+             <br>
+        </p>
+    </div>
+    
+
+    <script>
+        //1.Escriba un programa en JS que reciba un número entero N e imprima todos los números primos desde 1 hasta N
+       
+      //  document.write("<hr>")
+      (function () {
+
+var btnGenerate = document.getElementById('generatePrimes');
+var btnPrintChart = document.getElementById('printChart');
+var btnReset = document.getElementById('reset');
+var rdoFixed = document.getElementById('fixed');
+var txtOutput = document.getElementById('output');
+var firstEnd = document.getElementById('firstEnd');
+var userRange = document.getElementsByName('range');
+var userStart = document.getElementById('userStart');
+var userEnd = document.getElementById('userEnd');
+var userEndMax = 100000;
+
+var arrPrimes = [];
+
+btnGenerate.onclick = generatePrimeNumbers;
+btnPrintChart.onclick = displayChart;
+btnReset.onclick = resetForm;
+
+[firstEnd, userStart,userEnd].forEach(function(element){
+    element.onkeypress = handleInput;
+})
+
+
+
+function isPrime(value) {
+    for (var i = 2; i < value; i++) {
+        if (value % i === 0) {
+            return false;
+        }
+    }
+    return value > 1;
+}
+
+/**
+ * 
+ */
+function generatePrimeNumbers() {
+
+    var startNumber = 0;
+    var endNumber = parseInt(firstEnd.value);
+
+    if(endNumber > userEndMax){
+        firstEnd.value = userEndMax;
+        endNumber = userEndMax;
+    }
+
+    if (userRange[1].checked) {
+        var startNumber = parseInt(userStart.value);
+        var endNumber = parseInt(userEnd.value);
+        if(endNumber > userEndMax){
+            userEnd.value = userEndMax;
+            endNumber = userEndMax;
+        }
+    }
+
+    arrPrimes = [];
+
+    for (var i = startNumber; i < endNumber; i++) {
+        if (isPrime(i)) {
+            arrPrimes.push(i);
+        }
+    }
+
+    txtOutput.value = arrPrimes;
+}
+
+/**
+ * 
+ */
+function displayChart() {
+
+    var rows = chunkArray(arrPrimes, 10);
+    var html = '<table align="center" style="width: 460px;">';
+    html += '<tr><td colspan="10" style="background-color: #000; color: #FFF; text-align: center;">Prime Numbers</td></tr>';
+
+    rows.forEach(function (element) {
+        html += '<tr>';
+        html += '<td style="width: 30px">' + valueOrEmpty(element[0]) + '</td>';
+        html += '<td style="width: 30px">' + valueOrEmpty(element[1]) + '</td>';
+        html += '<td style="width: 30px">' + valueOrEmpty(element[2]) + '</td>';
+        html += '<td style="width: 30px">' + valueOrEmpty(element[3]) + '</td>';
+        html += '<td style="width: 30px">' + valueOrEmpty(element[4]) + '</td>';
+        html += '<td style="width: 30px">' + valueOrEmpty(element[5]) + '</td>';
+        html += '<td style="width: 30px">' + valueOrEmpty(element[6]) + '</td>';
+        html += '<td style="width: 30px">' + valueOrEmpty(element[7]) + '</td>';
+        html += '<td style="width: 30px">' + valueOrEmpty(element[8]) + '</td>';
+        html += '<td style="width: 30px">' + valueOrEmpty(element[9]) + '</td>';
+        console.log(element);
+    });
+
+    html += "</table>";
+    console.log(html);
+    var win = window.open("", "", "width=500,height=600");
+    win.document.open();
+    win.document.write(html);
+    win.document.close();
+    win.focus();
+}
+
+/**
+ * 
+ * @param {*} value 
+ */
+function valueOrEmpty(value) {
+    return value || '';
+}
+
+/**
+ * 
+ * @param {*} myArray 
+ * @param {*} chunk_size 
+ */
+function chunkArray(myArray, chunk_size) {
+    var index = 0;
+    var arrayLength = myArray.length;
+    var tempArray = [];
+    for (index = 0; index < arrayLength; index += chunk_size) {
+        myChunk = myArray.slice(index, index + chunk_size);
+        tempArray.push(myChunk);
+    }
+    return tempArray;
+}
+
+/**
+ * 
+ */
+function resetForm() {
+    rdoFixed.checked = true;
+    txtOutput.value = '';
+    firstEnd.value = 100;
+    userStart.value = 0;
+    userEnd.value = 100;
+}
+
+function handleInput(event){
+    if (event.keyCode < 48 || event.keyCode > 57 ) {
+        return false;
+    }  
+}
+
+}
+)();
+    
+
+    </script>
+
+</body>
+
+</html>

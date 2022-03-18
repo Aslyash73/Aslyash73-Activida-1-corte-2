@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ACTIVIDAD 1</title>
+    <script type="text/javascript" src="JS actividad 1.js"></script>
+</head>
+
+<body>
+
+    <div style="background-color:rgb(131, 202, 226);color:rgb(7, 6, 6);padding:30px;">
+        <h2 style="text-align:center">
+            <b>
+                <nav>👩
+            </b> La serie de Fibonacci👩</nav>
+        </h2>
+        <h3>
+                <div class="ejercicio3">
+                    <h2>Serie de Fibonacci</h2>
+                    <p>Dado un número N, imprima los primeros N términos de la serie de Fibonacci.</p>
+                    <div>
+                        <input type="number" name="numero3" id="numero3" placeholder="Ingresa un número">
+                        <button id="btnFibonacci">Calcular</button>
+                    </div>
+                    <div>
+                        <h2>Resultado:</h2>
+                        <span id="resultado"></span>
+                    </div>
+                </div>
+    </div>
+    </div>
+    </div>
+
+    <p></p>
+    <script>
+        let cantidadElementos = 7
+
+        const calcularTerminosFibonacci = (cantidadElementos) => {
+            let elementos = [1, 1];
+
+            for (let index = 2; index < cantidadElementos; index++) {
+                let sumatoria = elementos[index - 2] + elementos[index - 1]
+                elementos.push(sumatoria)
+            }
+
+            return elementos
+        }
+
+        const btnFibonacci = document.getElementById("btnFibonacci")
+
+        btnFibonacci.addEventListener('click', () => {
+            let cantidadElementos = document.getElementById("numero3").value
+
+            if (cantidadElementos === "") {
+                alert("Debes ingresar un número")
+            }
+
+            if (cantidadElementos <= 0) {
+                alert("Solo se admiten mayores que cero")
+            } else {
+                let resultado = document.getElementById("resultado")
+                resultado.innerHTML = calcularTerminosFibonacci(cantidadElementos)
+            }
+        })
+
+
+
+
+    </script>
+
+</body>
+
+</html>

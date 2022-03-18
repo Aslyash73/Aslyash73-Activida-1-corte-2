@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ACTIVIDAD 1</title>
+    <script type="text/javascript" src="JS actividad 1.js"></script>
+</head>
+
+<body>
+    <div style="background-color:rgb(131, 202, 226);color:rgb(7, 6, 6);padding:30px;">
+        <h2 style="text-align:center">
+            <b>
+                <nav>👩
+            </b> SUMATORIA👩</nav>
+        </h2>
+        
+            <hr>
+            <h2 style="text-align: center;"> La sumatoria de N numeros</h2>
+
+            <div class="ejercicio2">
+                <h2>Sumatoria</h2>
+                <p>
+                    Imprima la sumatoria: <br>
+                </p>
+                <div>
+                    <input type="number" name="numero2" id="numero2" placeholder="Ingresa un número">
+                    <button id="btnSumatoria">Calcular</button>
+                
+                <div>
+                    <h2>Resultado:</h2>
+                    <span id="resultadoo"></span>
+                </div>
+            </div>
+    </div>
+    <div class="sumatorias">
+        <div class="ejercicio_2">
+        </div>
+        
+        <script>
+
+            const calcularSumatoria = (exp) => {
+                let sumatoria = 0
+
+                for (let index = 1; index <= exp; index++) {
+                    sumatoria += Math.pow(index, exp)
+                }
+
+                return sumatoria
+            }
+
+            const btnSumatoria = document.getElementById("btnSumatoria")
+
+            btnSumatoria.addEventListener('click', () => {
+                
+                let numero = document.getElementById("numero2").value
+                console.log(numero)
+
+                if (numero === "") {
+                    alert("Ingresar un número")
+                }
+
+                if (numero < 0) {
+                    alert("Solo  números positivos")
+                } else {
+                    let resultado = document.getElementById("resultadoo")
+                    resultado.innerHTML = calcularSumatoria(numero)
+                }
+            })
+
+
+        </script>
+
+</body>
+
+</html>
